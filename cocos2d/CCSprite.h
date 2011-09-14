@@ -82,7 +82,11 @@ typedef enum {
  */
 @interface CCSprite : CCNode <CCRGBAProtocol, CCTextureProtocol>
 {
-	
+
+	//
+	// XXX: Should be placed in a union
+	//
+
 	//
 	// Data used when the sprite is rendered using a CCSpriteBatchNode
 	//
@@ -93,12 +97,14 @@ typedef enum {
 	BOOL					dirty_:1;				// Sprite needs to be updated
 	BOOL					recursiveDirty_:1;		// Subchildren needs to be updated
 	BOOL					hasChildren_:1;			// optimization to check if it contain children
-	
+
 	//
 	// Data used when the sprite is self-rendered
 	//
 	ccBlendFunc				blendFunc_;				// Needed for the texture protocol
 	CCTexture2D				*texture_;				// Texture used to render the sprite
+	GLuint					bufferVBO_;				// VBO for the vertices
+	GLuint					VAOname_;				// VAO name
 	
 	//
 	// Shared data
@@ -109,7 +115,7 @@ typedef enum {
 	CGRect	rectInPixels_;
 	BOOL	rectRotated_:1;
 
-	// whether or not it's parent is a CCSpriteBatchNode
+	// whether or not its parent is a CCSpriteBatchNode
 	BOOL	usesBatchNode_:1;
 	
 	// Offset Position (used by Zwoptex)

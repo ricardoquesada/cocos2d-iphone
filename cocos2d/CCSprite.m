@@ -42,6 +42,7 @@
 #import "Support/CGPointExtension.h"
 #import "Support/TransformUtils.h"
 #import "Support/CCProfiling.h"
+#import "Support/OpenGL_Internal.h"
 
 // external
 #import "kazmath/GL/matrix.h"
@@ -140,7 +141,7 @@ struct transformValues_ {
 {
 	if( (self = [super init]) )
 	{
-		dirty_ = recursiveDirty_ = NO;
+		dirty_ = recursiveDirty_ = YES;
 		
 		// by default use "Self Render".
 		// if the sprite is added to a batchnode, then it will automatically switch to "batchnode Render"
@@ -282,6 +283,11 @@ struct transformValues_ {
 - (void) dealloc
 {
 	[texture_ release];
+	if( bufferVBO_ )
+		glDeleteBuffers(1, &bufferVBO_ );
+	if( VAOname_ )
+		ccGLDeleteVertexArrays(1, &VAOname_);
+
 	[super dealloc];
 }
 
@@ -300,7 +306,42 @@ struct transformValues_ {
 	quad_.bl.vertices = (ccVertex3F) { x1, y1, 0 };
 	quad_.br.vertices = (ccVertex3F) { x2, y1, 0 };
 	quad_.tl.vertices = (ccVertex3F) { x1, y2, 0 };
-	quad_.tr.vertices = (ccVertex3F) { x2, y2, 0 };		
+	quad_.tr.vertices = (ccVertex3F) { x2, y2, 0 };
+	
+	
+	// reuse VBO & VAO object
+	if( ! bufferVBO_ ) {
+		
+		/// new ///
+		ccGLGenVertexArrays(1, &VAOname_);
+		ccGLBindVertexArray(VAOname_);
+		
+#define kQuadSize sizeof(quad_.bl)
+		
+		glGenBuffers(1, &bufferVBO_);
+
+		// initial binding
+		glBindBuffer(GL_ARRAY_BUFFER, bufferVBO_);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(quad_), &quad_,GL_DYNAMIC_DRAW);	
+		
+		// vertices
+		glEnableVertexAttribArray(kCCVertexAttrib_Position);
+		glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, kQuadSize, (GLvoid*) offsetof( ccV3F_C4B_T2F, vertices));
+		
+		// colors
+		glEnableVertexAttribArray(kCCVertexAttrib_Color);
+		glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, (GLvoid*) offsetof( ccV3F_C4B_T2F, colors));
+		
+		// tex coords
+		glEnableVertexAttribArray(kCCVertexAttrib_TexCoords);
+		glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kQuadSize, (GLvoid*) offsetof( ccV3F_C4B_T2F, texCoords));
+		
+		ccGLBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		
+		CHECK_GL_ERROR_DEBUG();
+
+	}
 }
 
 -(void) useBatchNode:(CCSpriteBatchNode*)batchNode
@@ -308,6 +349,14 @@ struct transformValues_ {
 	usesBatchNode_ = YES;
 	textureAtlas_ = [batchNode textureAtlas]; // weak ref
 	batchNode_ = batchNode; // weak ref
+	
+	// cleanup VBO & VAO from self render
+	if( bufferVBO_ ) {
+		glDeleteBuffers(1, &bufferVBO_ );
+		bufferVBO_ = 0;
+		ccGLDeleteVertexArrays(1, &VAOname_);
+		VAOname_ = 0;
+	}
 }
 
 -(void) setTextureRect:(CGRect)rect
@@ -339,14 +388,11 @@ struct transformValues_ {
 	offsetPosition_.y = relativeOffset.y + (contentSize_.height - rect_.size.height) / 2;
 	
 	
-	// rendering using batch node
-	if( usesBatchNode_ ) {
-		// update dirty_, don't update recursiveDirty_
-		dirty_ = YES;
-	}
+	// update dirty_, don't update recursiveDirty_
+	dirty_ = YES;
 
 	// self rendering
-	else
+	if( ! usesBatchNode_ )
 	{
 		// Atlas: Vertex
 		float x1 = offsetPosition_.x;
@@ -574,12 +620,21 @@ struct transformValues_ {
 
 -(void) draw
 {
+	NSAssert(!usesBatchNode_, @"If CCSprite is being rendered by CCSpriteBatchNode, CCSprite#draw SHOULD NOT be called");
+
 	CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"CCSprite - draw");
 
 	[super draw];
-	
-	NSAssert(!usesBatchNode_, @"If CCSprite is being rendered by CCSpriteBatchNode, CCSprite#draw SHOULD NOT be called");
 
+	ccGLBindVertexArray( VAOname_ );
+
+	if( dirty_ ) {
+		glBindBuffer(GL_ARRAY_BUFFER, bufferVBO_);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(quad_), &quad_);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		dirty_ = NO;
+	}
+	
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_PosColorTex );
 	
 	ccGLBlendFunc( blendFunc_.src, blendFunc_.dst );
@@ -588,28 +643,10 @@ struct transformValues_ {
 	ccGLUniformModelViewProjectionMatrix( shaderProgram_ );
 	
 	ccGLBindTexture2D( [texture_ name] );
-		
-	//
-	// Attributes
-	//
-#define kQuadSize sizeof(quad_.bl)
-	long offset = (long)&quad_;
 	
-	// vertex
-	NSInteger diff = offsetof( ccV3F_C4B_T2F, vertices);
-	glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
-	
-	// texCoods
-	diff = offsetof( ccV3F_C4B_T2F, texCoords);
-	glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kQuadSize, (void*)(offset + diff));
-
-	// color
-	diff = offsetof( ccV3F_C4B_T2F, colors);
-	glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, (void*)(offset + diff));
-	
-
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	
+	ccGLBindVertexArray( 0 );
 	
 #if CC_SPRITE_DEBUG_DRAW == 1
 	// draw bounding box
@@ -629,9 +666,11 @@ struct transformValues_ {
 	};
 	ccDrawPoly(vertices, 4, YES);
 #endif // CC_SPRITE_DEBUG_DRAW
-	
+
 
 	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"CCSprite - draw");
+	
+	CHECK_GL_ERROR_DEBUG();
 }
 
 #pragma mark CCSprite - CCNode overrides
@@ -716,8 +755,9 @@ struct transformValues_ {
 
 // XXX HACK: optimization
 #define SET_DIRTY_RECURSIVELY() {									\
-					if( usesBatchNode_ && ! recursiveDirty_ ) {	\
-						dirty_ = recursiveDirty_ = YES;				\
+					dirty_ = YES;									\
+					if( usesBatchNode_ && ! recursiveDirty_ ) {		\
+						recursiveDirty_ = YES;						\
 						if( hasChildren_)							\
 							[self setDirtyRecursively:YES];			\
 						}											\
