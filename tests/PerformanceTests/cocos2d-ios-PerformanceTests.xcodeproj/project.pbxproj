@@ -460,6 +460,7 @@
 		A0AE16A414151611009AA391 /* Twist.vsh in Resources */ = {isa = PBXBuildFile; fileRef = A0AE163A14151611009AA391 /* Twist.vsh */; };
 		A0AE16A514151611009AA391 /* Twist.vsh in Resources */ = {isa = PBXBuildFile; fileRef = A0AE163A14151611009AA391 /* Twist.vsh */; };
 		A0AE16A614151611009AA391 /* Twist.vsh in Resources */ = {isa = PBXBuildFile; fileRef = A0AE163A14151611009AA391 /* Twist.vsh */; };
+		A0E9541A1426EC64009F9607 /* fastlz.m in Sources */ = {isa = PBXBuildFile; fileRef = A0E954131426EC13009F9607 /* fastlz.m */; };
 		A0F6EA8D14152314008F01A1 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F6EA8814152314008F01A1 /* Icon-72.png */; };
 		A0F6EA8E14152314008F01A1 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F6EA8814152314008F01A1 /* Icon-72.png */; };
 		A0F6EA8F14152314008F01A1 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F6EA8814152314008F01A1 /* Icon-72.png */; };
@@ -919,6 +920,10 @@
 		A0AE163814151611009AA391 /* PositionTextureColor.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PositionTextureColor.vsh; sourceTree = "<group>"; };
 		A0AE163914151611009AA391 /* Twist.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Twist.fsh; sourceTree = "<group>"; };
 		A0AE163A14151611009AA391 /* Twist.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Twist.vsh; sourceTree = "<group>"; };
+		A0E954131426EC13009F9607 /* fastlz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = fastlz.m; path = ../../../../Downloads/fastlz.m; sourceTree = "<group>"; };
+		A0E954141426EC13009F9607 /* fastlz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fastlz.h; path = ../../../../Downloads/fastlz.h; sourceTree = "<group>"; };
+		A0E954151426EC13009F9607 /* lzfx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = lzfx.m; path = ../../../../Downloads/lzfx.m; sourceTree = "<group>"; };
+		A0E954161426EC13009F9607 /* lzfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lzfx.h; path = ../../../../Downloads/lzfx.h; sourceTree = "<group>"; };
 		A0F6EA8814152314008F01A1 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../../Resources/Icon-72.png"; sourceTree = "<group>"; };
 		A0F6EA8914152314008F01A1 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "../../Resources/Icon-Small-50.png"; sourceTree = "<group>"; };
 		A0F6EA8A14152314008F01A1 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "../../Resources/Icon-Small.png"; sourceTree = "<group>"; };
@@ -1041,6 +1046,10 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A0E954131426EC13009F9607 /* fastlz.m */,
+				A0E954141426EC13009F9607 /* fastlz.h */,
+				A0E954151426EC13009F9607 /* lzfx.m */,
+				A0E954161426EC13009F9607 /* lzfx.h */,
 				A037D1C5141510EB0091B5C7 /* kazmath */,
 				A037D070141510D80091B5C7 /* cocos2d */,
 				503095C0104482EA005F7AFC /* PerformanceSpriteTest */,
@@ -2306,6 +2315,7 @@
 				E0B0E65811F8C4A400414246 /* PerformanceTextureTest.m in Sources */,
 				E0B0E65911F8C4C200414246 /* main.m in Sources */,
 				A0AE161E14151568009AA391 /* RootViewController.m in Sources */,
+				A0E9541A1426EC64009F9607 /* fastlz.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
