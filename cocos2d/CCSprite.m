@@ -142,7 +142,6 @@
 		offsetPosition_ = CGPointZero;
 
 		hasChildren_ = NO;
-		batchNode_ = nil;
 
 		// clean the Quad
 		bzero(&quad_, sizeof(quad_));
@@ -160,6 +159,7 @@
 
 		// by default use "Self Render".
 		// if the sprite is added to a batchnode, then it will automatically switch to "batchnode Render"
+		batchNode_ = (void*)1; // Hack
 		[self setBatchNode:nil];
 
 	}
@@ -259,28 +259,39 @@
 
 -(void) setBatchNode:(CCSpriteBatchNode *)batchNode
 {
-	batchNode_ = batchNode; // weak reference
+	if( batchNode_ != batchNode ) {
+		
+		batchNode_ = batchNode; // weak reference
 
-	// self render
-	if( ! batchNode ) {
-		atlasIndex_ = CCSpriteIndexNotInitialized;
-		textureAtlas_ = nil;
-		dirty_ = recursiveDirty_ = NO;
+		// self render
+		if( ! batchNode ) {
+			atlasIndex_ = CCSpriteIndexNotInitialized;
+			textureAtlas_ = nil;
+			recursiveDirty_ = NO;
+			dirty_ = YES;
 
-		float x1 = offsetPosition_.x;
-		float y1 = offsetPosition_.y;
-		float x2 = x1 + rect_.size.width;
-		float y2 = y1 + rect_.size.height;
-		quad_.bl.vertices = (ccVertex3F) { x1, y1, 0 };
-		quad_.br.vertices = (ccVertex3F) { x2, y1, 0 };
-		quad_.tl.vertices = (ccVertex3F) { x1, y2, 0 };
-		quad_.tr.vertices = (ccVertex3F) { x2, y2, 0 };
+			float x1 = offsetPosition_.x;
+			float y1 = offsetPosition_.y;
+			float x2 = x1 + rect_.size.width;
+			float y2 = y1 + rect_.size.height;
+			quad_.bl.vertices = (ccVertex3F) { x1, y1, 0 };
+			quad_.br.vertices = (ccVertex3F) { x2, y1, 0 };
+			quad_.tl.vertices = (ccVertex3F) { x1, y2, 0 };
+			quad_.tr.vertices = (ccVertex3F) { x2, y2, 0 };
+			
+			glGenBuffers(1, &bufferVBO_ );
+			glBindBuffer(GL_ARRAY_BUFFER, bufferVBO_);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(quad_), &quad_, GL_DYNAMIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	} else {
+		} else {
+			
+			glDeleteBuffers(1, &bufferVBO_ );
 
-		// using batch
-		transformToBatch_ = CGAffineTransformIdentity;
-		textureAtlas_ = [batchNode textureAtlas]; // weak ref
+			// using batch
+			transformToBatch_ = CGAffineTransformIdentity;
+			textureAtlas_ = [batchNode textureAtlas]; // weak ref
+		}
 	}
 }
 
@@ -310,14 +321,10 @@
 	offsetPosition_.y = relativeOffset.y + (contentSize_.height - rect_.size.height) / 2;
 
 
-	// rendering using batch node
-	if( batchNode_ ) {
-		// update dirty_, don't update recursiveDirty_
-		dirty_ = YES;
-	}
+	dirty_ = YES;
 
 	// self rendering
-	else
+	if( ! batchNode_ )
 	{
 		// Atlas: Vertex
 		float x1 = offsetPosition_.x;
@@ -505,29 +512,35 @@
 
 	ccGLBindTexture2D( [texture_ name] );
 
+	
+	glBindBuffer(GL_ARRAY_BUFFER, bufferVBO_ );
+    
+	// XXX: update is done in draw... perhaps it should be done in a timer
+	if (dirty_) {
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(quad_), &quad_ );
+		dirty_ = NO;
+	}
+
 	//
 	// Attributes
 	//
 
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_PosColorTex );
-
-#define kQuadSize sizeof(quad_.bl)
-	long offset = (long)&quad_;
+	
+	#define kQuadSize sizeof(quad_.bl)
 
 	// vertex
-	NSInteger diff = offsetof( ccV3F_C4B_T2F, vertices);
-	glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
-
-	// texCoods
-	diff = offsetof( ccV3F_C4B_T2F, texCoords);
-	glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kQuadSize, (void*)(offset + diff));
-
-	// color
-	diff = offsetof( ccV3F_C4B_T2F, colors);
-	glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, (void*)(offset + diff));
-
+	glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, kQuadSize, (GLvoid*) offsetof( ccV3F_C4B_T2F, vertices));
+	
+	// colors
+	glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, (GLvoid*) offsetof( ccV3F_C4B_T2F, colors));
+	
+	// tex coords
+	glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kQuadSize, (GLvoid*) offsetof( ccV3F_C4B_T2F, texCoords));
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	CHECK_GL_ERROR_DEBUG();
 
@@ -685,8 +698,9 @@
 
 // XXX HACK: optimization
 #define SET_DIRTY_RECURSIVELY() {									\
-					if( batchNode_ && ! recursiveDirty_ ) {	\
-						dirty_ = recursiveDirty_ = YES;				\
+					dirty_ = YES;									\
+					if( batchNode_ && ! recursiveDirty_ ) {			\
+						recursiveDirty_ = YES;						\
 						if( hasChildren_)							\
 							[self setDirtyRecursively:YES];			\
 						}											\
@@ -803,9 +817,10 @@
 			// no need to set it recursively
 			// update dirty_, don't update recursiveDirty_
 			dirty_ = YES;
+	} else {
+		// self render
+		dirty_ = YES;
 	}
-	// self render
-	// do nothing
 }
 
 -(GLubyte) opacity

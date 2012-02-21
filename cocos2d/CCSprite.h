@@ -62,15 +62,12 @@
  */
 @interface CCSprite : CCNode <CCRGBAProtocol, CCTextureProtocol>
 {
-
 	//
 	// Data used when the sprite is rendered using a CCSpriteBatchNode
 	//
 	CCTextureAtlas			*textureAtlas_;			// Sprite Sheet texture atlas (weak reference)
 	NSUInteger				atlasIndex_;			// Absolute (real) Index on the batch node
-	CCSpriteBatchNode		*batchNode_;			// Used batch node (weak reference)
 	CGAffineTransform		transformToBatch_;		//
-	bool					dirty_:1;				// Sprite needs to be updated
 	bool					recursiveDirty_:1;		// Subchildren needs to be updated
 	bool					hasChildren_:1;			// optimization to check if it contain children
 	bool					shouldBeHidden_:1;		// should not be drawn because one of the ancestors is not visible
@@ -80,16 +77,17 @@
 	//
 	ccBlendFunc				blendFunc_;				// Needed for the texture protocol
 	CCTexture2D				*texture_;				// Texture used to render the sprite
+	GLuint					bufferVBO_;				// VBO to draw sprite
 
 	//
 	// Shared data
 	//
 
+	// Used batch node (weak reference). If nil, it means "self render"	
+	CCSpriteBatchNode		*batchNode_;			
+
 	// sprite rectangle
 	CGRect	rect_;
-
-	// texture
-	bool	rectRotated_:1;
 
 	// Offset Position (used by Zwoptex)
 	CGPoint	offsetPosition_;
@@ -107,6 +105,10 @@
 	// image is flipped
 	bool	flipX_:1;
 	bool	flipY_:1;
+	// texture
+	bool	rectRotated_:1;
+	// Sprite needs to be updated
+	bool	dirty_:1;
 }
 
 /** whether or not the Sprite needs to be updated in the Atlas */
