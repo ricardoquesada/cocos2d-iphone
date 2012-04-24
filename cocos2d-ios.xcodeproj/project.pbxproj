@@ -1400,8 +1400,9 @@
 		A01D2D5215462151003DA246 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */; };
 		A01D2D5315462151003DA246 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5018F24D0DFDEAC400C013A5 /* libcocos2d.a */; };
 		A01D2D5415462151003DA246 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 503092B210447296005F7AFC /* libz.dylib */; };
-		A01D2D5515462151003DA246 /* libjs_static-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A01D2D0915462108003DA246 /* libjs_static-ios.a */; };
 		A01D2D5F1546220E003DA246 /* JavascriptTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D2D5D1546220E003DA246 /* JavascriptTest.m */; };
+		A01D2D62154628A9003DA246 /* CCJSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D2D60154628A9003DA246 /* CCJSManager.m */; };
+		A01D2D63154628A9003DA246 /* CCJSManager.h in Headers */ = {isa = PBXBuildFile; fileRef = A01D2D61154628A9003DA246 /* CCJSManager.h */; };
 		A034FF86149DC994009F11AA /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A034FF85149DC993009F11AA /* GameKit.framework */; };
 		A03A1D0814F5BEFA0019B6F3 /* geneva-32.fnt in Resources */ = {isa = PBXBuildFile; fileRef = A03A1D0514F5BEFA0019B6F3 /* geneva-32.fnt */; };
 		A03A1D0914F5BEFA0019B6F3 /* helvetica-32.fnt in Resources */ = {isa = PBXBuildFile; fileRef = A03A1D0614F5BEFA0019B6F3 /* helvetica-32.fnt */; };
@@ -2060,6 +2061,7 @@
 		A0DC2F5E1491B36A005B814E /* test_image_rgb888.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A0DC2F5D1491B36A005B814E /* test_image_rgb888.pvr */; };
 		A0DEFC351538DE0000530CC5 /* grossini_dance_atlas_nomipmap-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DEFC341538DE0000530CC5 /* grossini_dance_atlas_nomipmap-hd.png */; };
 		A0DEFC381538E2B300530CC5 /* grossini_pvr_rgba8888.pvr in Resources */ = {isa = PBXBuildFile; fileRef = A0DEFC371538E2B300530CC5 /* grossini_pvr_rgba8888.pvr */; };
+		A0DF7E431547302B00DAE90B /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0DF7E421547302B00DAE90B /* libc++.dylib */; };
 		A0E2A52B14D26D8D003450DF /* animations in Resources */ = {isa = PBXBuildFile; fileRef = 502C8C9810A701D300D137BA /* animations */; };
 		A0E431F31460741E00424477 /* background1-hd.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E0704C29123821EE009C628B /* background1-hd.jpg */; };
 		A0E431F41460741E00424477 /* background2-hd.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E0704C2A123821EE009C628B /* background2-hd.jpg */; };
@@ -4457,10 +4459,11 @@
 		A01AB91A149709E300C93DB6 /* DirectorTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DirectorTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01AB95214970B1F00C93DB6 /* DirectorTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DirectorTest.h; path = tests/DirectorTest.h; sourceTree = "<group>"; };
 		A01AB95314970B1F00C93DB6 /* DirectorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirectorTest.m; path = tests/DirectorTest.m; sourceTree = "<group>"; };
-		A01D2D0915462108003DA246 /* libjs_static-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libjs_static-ios.a"; path = "external/spidermonkey/lib/libjs_static-ios.a"; sourceTree = "<group>"; };
 		A01D2D5915462151003DA246 /* JavascriptTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JavascriptTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01D2D5C1546220E003DA246 /* JavascriptTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JavascriptTest.h; path = tests/JavascriptTest.h; sourceTree = "<group>"; };
 		A01D2D5D1546220E003DA246 /* JavascriptTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JavascriptTest.m; path = tests/JavascriptTest.m; sourceTree = "<group>"; };
+		A01D2D60154628A9003DA246 /* CCJSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCJSManager.m; sourceTree = "<group>"; };
+		A01D2D61154628A9003DA246 /* CCJSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCJSManager.h; sourceTree = "<group>"; };
 		A034FF85149DC993009F11AA /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		A03A1D0514F5BEFA0019B6F3 /* geneva-32.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "geneva-32.fnt"; sourceTree = "<group>"; };
 		A03A1D0614F5BEFA0019B6F3 /* helvetica-32.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "helvetica-32.fnt"; sourceTree = "<group>"; };
@@ -4742,6 +4745,7 @@
 		A0DC2F5D1491B36A005B814E /* test_image_rgb888.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = test_image_rgb888.pvr; sourceTree = "<group>"; };
 		A0DEFC341538DE0000530CC5 /* grossini_dance_atlas_nomipmap-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grossini_dance_atlas_nomipmap-hd.png"; sourceTree = "<group>"; };
 		A0DEFC371538E2B300530CC5 /* grossini_pvr_rgba8888.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = grossini_pvr_rgba8888.pvr; sourceTree = "<group>"; };
+		A0DF7E421547302B00DAE90B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		A0EC4A091403236C00EC482A /* example_Blur.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = example_Blur.fsh; sourceTree = "<group>"; };
 		A0EC4A0A1403236C00EC482A /* example_Flower.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = example_Flower.fsh; sourceTree = "<group>"; };
 		A0EC4A0B1403236C00EC482A /* example_Flower.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = example_Flower.vsh; sourceTree = "<group>"; };
@@ -5559,6 +5563,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0DF7E431547302B00DAE90B /* libc++.dylib in Frameworks */,
 				A01D2D4E15462151003DA246 /* Foundation.framework in Frameworks */,
 				A01D2D4F15462151003DA246 /* UIKit.framework in Frameworks */,
 				A01D2D5015462151003DA246 /* CoreGraphics.framework in Frameworks */,
@@ -5566,7 +5571,6 @@
 				A01D2D5215462151003DA246 /* QuartzCore.framework in Frameworks */,
 				A01D2D5315462151003DA246 /* libcocos2d.a in Frameworks */,
 				A01D2D5415462151003DA246 /* libz.dylib in Frameworks */,
-				A01D2D5515462151003DA246 /* libjs_static-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5836,6 +5840,7 @@
 				50E3877010446C6E00150883 /* OpenAL.framework */,
 				A034FF85149DC993009F11AA /* GameKit.framework */,
 				503092B210447296005F7AFC /* libz.dylib */,
+				A0DF7E421547302B00DAE90B /* libc++.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -5882,7 +5887,6 @@
 		501756090F335CE900624901 /* external */ = {
 			isa = PBXGroup;
 			children = (
-				A01D2D0915462108003DA246 /* libjs_static-ios.a */,
 				A015BFAB13B826D800C73E76 /* kazmath */,
 				50E5F309110690D300E3FCF5 /* Chipmunk */,
 				506EDF01102FBC0C00A389B3 /* Box2d */,
@@ -5908,6 +5912,7 @@
 				501CCFA30E99657C00B86F68 /* Support */,
 				E0BC7DA11342CE83001B4DCC /* Shaders */,
 				E0EAD0E8121F4B4600B0C81C /* Platforms */,
+				A01D2D64154628BE003DA246 /* Javascript */,
 				50305AF30E40E33200F63373 /* cocos2d.h */,
 				50A07B7A0E4CBCD300AAF0BB /* cocos2d.m */,
 				A09AB76714EA12F7009C8B91 /* ccDeprecated.h */,
@@ -7029,6 +7034,15 @@
 			path = gl_utils;
 			sourceTree = "<group>";
 		};
+		A01D2D64154628BE003DA246 /* Javascript */ = {
+			isa = PBXGroup;
+			children = (
+				A01D2D60154628A9003DA246 /* CCJSManager.m */,
+				A01D2D61154628A9003DA246 /* CCJSManager.h */,
+			);
+			name = Javascript;
+			sourceTree = "<group>";
+		};
 		A0793447141990CC00AC44D4 /* Testbed */ = {
 			isa = PBXGroup;
 			children = (
@@ -7641,6 +7655,7 @@
 				A09CEEA2150EB30D001E49B8 /* ccShader_PositionTextureColor_vert.h in Headers */,
 				A09CEEA3150EB30D001E49B8 /* ccShader_PositionTextureColorAlphaTest_frag.h in Headers */,
 				A0A7A53C1514F27D00C8BD16 /* CCActionCatmullRom.h in Headers */,
+				A01D2D63154628A9003DA246 /* CCJSManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11575,6 +11590,7 @@
 				A0C87D1B14F9A3A100C0E8B2 /* NSThread+performBlock.m in Sources */,
 				A093FF0A150E9BE00039327A /* ccShaders.m in Sources */,
 				A0A7A53D1514F27D00C8BD16 /* CCActionCatmullRom.m in Sources */,
+				A01D2D62154628A9003DA246 /* CCJSManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14528,6 +14544,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/external/spidermonkey/lib\"",
 				);
+				OTHER_LDFLAGS = (
+					"-ljs_static-ios",
+					"-ObjC",
+				);
 				PRODUCT_NAME = JavascriptTest;
 			};
 			name = Debug;
@@ -14546,6 +14566,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/external/spidermonkey/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ljs_static-ios",
+					"-ObjC",
 				);
 				PRODUCT_NAME = JavascriptTest;
 				ZERO_LINK = NO;

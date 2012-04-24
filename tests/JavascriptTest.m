@@ -129,7 +129,8 @@ Class restartAction()
 -(id) init
 {
 	if( (self=[super init]) ) {
-
+		CCJSManager *js = [CCJSManager sharedManager];
+		[js evalString:@"cocos.log('hola');"];
 	}
 	return self;
 }

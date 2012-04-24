@@ -58,7 +58,7 @@
 
 /* Define to 1 if the <endian.h> header is present and
    useable.  See jscpucfg.h.  */
-/* #undef JS_HAVE_ENDIAN_H */
+#define JS_HAVE_ENDIAN_H 1
 
 /* Define to 1 if the <machine/endian.h> header is present and
    useable.  See jscpucfg.h.  */
@@ -90,10 +90,10 @@
 /* #undef JS_INT32_TYPE */
 /* #undef JS_INT64_TYPE */
 /* #undef JS_INTPTR_TYPE */
-#define JS_BYTES_PER_WORD 8
+#define JS_BYTES_PER_WORD 4
 
 /* Some mozilla code uses JS-friend APIs that depend on JS_METHODJIT being
    correct. */
-#define JS_METHODJIT 1
+/* #undef JS_METHODJIT */
 
 #endif /* js_config_h___ */

@@ -33,6 +33,8 @@
 #import "Support/CCArray.h"
 #import "kazmath/kazmath.h"
 
+#include "jsapi.h"
+
 enum {
 	kCCNodeTagInvalid = -1,
 };
@@ -177,7 +179,10 @@ enum {
 	// Used by CCLayer and CCScene
 	BOOL ignoreAnchorPointForPosition_;
 
-	BOOL isReorderChildDirty_;	
+	BOOL isReorderChildDirty_;
+	
+	// JS
+	JSObject *jsObj_;
 }
 
 /** The z order of the node relative to its "siblings": children of the same parent */

@@ -148,6 +148,11 @@
 #endif
 
 //
+// JS support
+//
+#import "CCJSManager.h"
+
+//
 // cocos2d helper files
 //
 #import "Support/OpenGL_Internal.h"

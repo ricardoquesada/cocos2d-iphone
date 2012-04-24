@@ -24,6 +24,9 @@
  *
  */
 
+#ifndef __CC_FILEUTILS_H
+#define __CC_FILEUTILS_H
+
 
 #import <Foundation/Foundation.h>
 #import "../ccTypes.h"
@@ -176,5 +179,17 @@
  @returns the size of the allocated buffer
  @since v0.99.5
  */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 NSInteger ccLoadFileIntoMemory(const char *filename, unsigned char **out);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // __CC_FILEUTILS_H
+
 
