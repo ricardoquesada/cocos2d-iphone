@@ -238,7 +238,7 @@ const NSUInteger defaultCapacity = 29;
 	if (isReorderChildDirty_)
 	{
 		NSInteger i,j,length = children_->data->num;
-		CCNode ** x = children_->data->arr;
+		__AH_WEAK CCNode ** x = children_->data->arr;
 		CCNode *tempItem;
 		CCSprite *child;
 

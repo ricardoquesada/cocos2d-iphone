@@ -311,7 +311,7 @@ static CCTextureCache *sharedTextureCache;
 			}
 
 			// autorelease prevents possible crash in multithreaded environments
-			[tex autorelease];
+			AH_AUTORELEASE(tex);
 		}
 
 

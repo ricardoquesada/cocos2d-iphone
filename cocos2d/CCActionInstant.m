@@ -68,7 +68,7 @@
 
 -(CCFiniteTimeAction*) reverse
 {
-	return [[self copy] autorelease];
+	return AH_AUTORELEASE([self copy]);
 }
 @end
 
@@ -126,7 +126,7 @@
 @implementation CCFlipX
 +(id) actionWithFlipX:(BOOL)x
 {
-	return [[[self alloc] initWithFlipX:x] autorelease];
+	return AH_AUTORELEASE( [[self alloc] initWithFlipX:x] );
 }
 
 -(id) initWithFlipX:(BOOL)x
@@ -259,8 +259,9 @@
 
 -(void) dealloc
 {
-	[targetCallback_ release];
-	[super dealloc];
+	AH_RELEASE( targetCallback_ );
+	
+	AH_SUPER_DEALLOC;
 }
 
 -(id) copyWithZone: (NSZone*) zone
@@ -330,7 +331,7 @@
 -(void) dealloc
 {
 	// nothing to dealloc really. Everything is dealloc on super (CCCallFuncN)
-	[super dealloc];
+	AH_SUPER_DEALLOC;
 }
 
 -(void) execute
@@ -344,7 +345,7 @@
 
 +(id) actionWithTarget: (id) t selector:(SEL) s object:(id)object
 {
-	return [[[self alloc] initWithTarget:t selector:s object:object] autorelease];
+	return AH_AUTORELEASE( [[self alloc] initWithTarget:t selector:s object:object] );
 }
 
 -(id) initWithTarget:(id) t selector:(SEL) s object:(id)object
@@ -385,7 +386,7 @@
 
 +(id) actionWithBlock:(void(^)())block
 {
-	return [[[self alloc] initWithBlock:block] autorelease];
+	return AH_AUTORELEASE( [[self alloc] initWithBlock:block] );
 }
 
 -(id) initWithBlock:(void(^)())block
@@ -414,8 +415,9 @@
 
 -(void) dealloc
 {
-	[block_ release];
-	[super dealloc];
+	AH_RELEASE(block_);
+
+	AH_SUPER_DEALLOC;
 }
 
 @end
@@ -426,7 +428,7 @@
 
 +(id) actionWithBlock:(void(^)(CCNode *node))block
 {
-	return [[[self alloc] initWithBlock:block] autorelease];
+	return AH_AUTORELEASE( [[self alloc] initWithBlock:block] );
 }
 
 -(id) initWithBlock:(void(^)(CCNode *node))block

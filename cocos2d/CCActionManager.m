@@ -70,7 +70,7 @@
 	ccArrayFree(element->actions);
 	HASH_DEL(targets, element);
 //	CCLOG(@"cocos2d: ---- buckets: %d/%d - %@", targets->entries, targets->size, element->target);
-	[element->target release];
+	AH_RELEASE(element->target);
 	free(element);
 }
 
@@ -88,7 +88,7 @@
 	id action = element->actions->arr[index];
 
 	if( action == element->currentAction && !element->currentActionSalvaged ) {
-		[element->currentAction retain];
+		AH_RETAIN(element->currentAction);
 		element->currentActionSalvaged = YES;
 	}
 
@@ -194,7 +194,7 @@
 	HASH_FIND_INT(targets, &target, element);
 	if( element ) {
 		if( ccArrayContainsObject(element->actions, element->currentAction) && !element->currentActionSalvaged ) {
-			[element->currentAction retain];
+			AH_RETAIN(element->currentAction);
 			element->currentActionSalvaged = YES;
 		}
 		ccArrayRemoveAllObjects(element->actions);
@@ -309,7 +309,7 @@
 					// The currentAction told the node to remove it. To prevent the action from
 					// accidentally deallocating itself before finishing its step, we retained
 					// it. Now that step is done, it's safe to release it.
-					[currentTarget->currentAction release];
+					AH_RELEASE(currentTarget->currentAction);
 
 				} else if( [currentTarget->currentAction isDone] ) {
 					[currentTarget->currentAction stop];

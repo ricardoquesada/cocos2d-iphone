@@ -57,7 +57,7 @@
 
 +(id) atlasWithTileFile:(NSString*)tile tileWidth:(NSUInteger)w tileHeight:(NSUInteger)h itemsToRender: (NSUInteger) c
 {
-	return [[[self alloc] initWithTileFile:tile tileWidth:w tileHeight:h itemsToRender:c] autorelease];
+	return AH_AUTORELEASE( [[self alloc] initWithTileFile:tile tileWidth:w tileHeight:h itemsToRender:c] );
 }
 
 -(id) initWithTileFile:(NSString*)tile tileWidth:(NSUInteger)w tileHeight:(NSUInteger)h itemsToRender: (NSUInteger) c
@@ -76,11 +76,11 @@
 
 		CCTextureAtlas * newAtlas = [[CCTextureAtlas alloc] initWithFile:tile capacity:c];
 		self.textureAtlas = newAtlas;
-		[newAtlas release];		
+		AH_RELEASE( newAtlas );
 		
 		if( ! textureAtlas_ ) {
 			CCLOG(@"cocos2d: Could not initialize CCAtlasNode. Invalid Texture");
-			[self release];
+			AH_RELEASE( self );
 			return nil;
 		}
 
@@ -100,9 +100,9 @@
 
 -(void) dealloc
 {
-	[textureAtlas_ release];
+	AH_RELEASE( textureAtlas_ );
 
-	[super dealloc];
+	AH_SUPER_DEALLOC;
 }
 
 #pragma mark CCAtlasNode - Atlas generation
