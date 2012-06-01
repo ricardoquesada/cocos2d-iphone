@@ -31,7 +31,7 @@ static char *CCNode_JS_proxy_key;
 }
 @end
 
-#pragma mark - ProxyJS_CCNode
+#pragma mark - Proxy Node
 
 @implementation ProxyJS_CCNode
 
