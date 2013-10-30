@@ -5361,7 +5361,7 @@
 					external/Chipmunk/include/chipmunk,
 					external/kazmath/include,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = macosx;
@@ -5390,7 +5390,7 @@
 					external/Chipmunk/include/chipmunk,
 					external/kazmath/include,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = macosx;
 			};
