@@ -67,16 +67,16 @@
 -(id)      initWithFontName:(NSString *)name fontSize:(int)fontSize;
 
 // shadow
--(void)    enableShadow:(bool) shadowEnabled;
--(bool)    shadowEnabled;
+-(void)    enableShadow:(BOOL) shadowEnabled;
+-(BOOL)    shadowEnabled;
 -(void)    setShadowOffset:(CGSize)offset;
 -(CGSize)  shadowOffset;
 -(void)    setShadowBlur:(CGFloat)blur;
 -(CGFloat) shadowBlur;
 
 // stroke
--(void)     enableStroke:(bool) strokeEnabled;
--(bool)     strokeEnabled;
+-(void)     enableStroke:(BOOL) strokeEnabled;
+-(BOOL)     strokeEnabled;
 -(void)     setStrokeSize:(CGFloat)size;
 -(CGFloat)  strokeSize;
 -(void)     setStrokeColor:(ccColor3B)strokeColor;

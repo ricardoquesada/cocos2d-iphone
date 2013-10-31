@@ -1,28 +1,30 @@
-/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- * vim: set ts=4 sw=4 et tw=79 ft=cpp:
- *
+/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ * vim: set ts=8 sts=4 et sw=4 tw=99:
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-#ifndef jsclass_h__
-#define jsclass_h__
+#ifndef jsclass_h
+#define jsclass_h
 /*
  * A JSClass acts as a vtable for JS objects that allows JSAPI clients to
  * control various aspects of the behavior of an object like property lookup.
  * js::Class is an engine-private extension that allows more control over
  * object behavior and, e.g., allows custom slow layout.
  */
+
 #include "jsapi.h"
 #include "jsprvtd.h"
-
-#ifdef __cplusplus
 
 namespace js {
 
 class PropertyName;
 class SpecialId;
 class PropertyId;
+
+// This is equal to JSFunction::class_.  Use it in places where you don't want
+// to #include jsfun.h.
+extern JS_FRIEND_DATA(js::Class* const) FunctionClassPtr;
 
 static JS_ALWAYS_INLINE jsid
 SPECIALID_TO_JSID(const SpecialId &sid);
@@ -182,33 +184,33 @@ typedef JSBool
 typedef JSBool
 (* SpecialAttributesOp)(JSContext *cx, HandleObject obj, HandleSpecialId sid, unsigned *attrsp);
 typedef JSBool
-(* DeletePropertyOp)(JSContext *cx, HandleObject obj, HandlePropertyName name, MutableHandleValue vp, JSBool strict);
+(* DeletePropertyOp)(JSContext *cx, HandleObject obj, HandlePropertyName name, JSBool *succeeded);
 typedef JSBool
-(* DeleteElementOp)(JSContext *cx, HandleObject obj, uint32_t index, MutableHandleValue vp, JSBool strict);
+(* DeleteElementOp)(JSContext *cx, HandleObject obj, uint32_t index, JSBool *succeeded);
 typedef JSBool
-(* DeleteSpecialOp)(JSContext *cx, HandleObject obj, HandleSpecialId sid, MutableHandleValue vp, JSBool strict);
+(* DeleteSpecialOp)(JSContext *cx, HandleObject obj, HandleSpecialId sid, JSBool *succeeded);
 
 
 typedef JSObject *
 (* ObjectOp)(JSContext *cx, HandleObject obj);
 typedef void
-(* FinalizeOp)(FreeOp *fop, RawObject obj);
+(* FinalizeOp)(FreeOp *fop, JSObject *obj);
 
 #define JS_CLASS_MEMBERS                                                      \
     const char          *name;                                                \
     uint32_t            flags;                                                \
                                                                               \
-    /* Mandatory non-null function pointer members. */                        \
+    /* Mandatory function pointer members. */                                 \
     JSPropertyOp        addProperty;                                          \
-    JSPropertyOp        delProperty;                                          \
+    JSDeletePropertyOp  delProperty;                                          \
     JSPropertyOp        getProperty;                                          \
     JSStrictPropertyOp  setProperty;                                          \
     JSEnumerateOp       enumerate;                                            \
     JSResolveOp         resolve;                                              \
     JSConvertOp         convert;                                              \
-    FinalizeOp          finalize;                                             \
                                                                               \
-    /* Optionally non-null members start here. */                             \
+    /* Optional members (may be null). */                                     \
+    FinalizeOp          finalize;                                             \
     JSCheckAccessOp     checkAccess;                                          \
     JSNative            call;                                                 \
     JSHasInstanceOp     hasInstance;                                          \
@@ -217,7 +219,7 @@ typedef void
 
 /*
  * The helper struct to measure the size of JS_CLASS_MEMBERS to know how much
- * we have to padd js::Class to match the size of JSClass;
+ * we have to pad js::Class to match the size of JSClass.
  */
 struct ClassSizeMeasurement
 {
@@ -315,6 +317,10 @@ struct Class
         return flags & JSCLASS_EMULATES_UNDEFINED;
     }
 
+    bool isCallable() const {
+        return this == js::FunctionClassPtr || call;
+    }
+
     static size_t offsetOfFlags() { return offsetof(Class, flags); }
 };
 
@@ -363,7 +369,7 @@ Valueify(const JSClass *c)
  */
 enum ESClassValue {
     ESClass_Array, ESClass_Number, ESClass_String, ESClass_Boolean,
-    ESClass_RegExp, ESClass_ArrayBuffer
+    ESClass_RegExp, ESClass_ArrayBuffer, ESClass_Date
 };
 
 /*
@@ -387,7 +393,7 @@ IsPoisonedSpecialId(js::SpecialId iden)
     return false;
 }
 
-template <> struct RootMethods<SpecialId>
+template <> struct GCMethods<SpecialId>
 {
     static SpecialId initial() { return SpecialId(); }
     static ThingRootKind kind() { return THING_ROOT_ID; }
@@ -396,6 +402,4 @@ template <> struct RootMethods<SpecialId>
 
 }  /* namespace js */
 
-#endif  /* __cplusplus */
-
-#endif  /* jsclass_h__ */
+#endif  /* jsclass_h */

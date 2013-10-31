@@ -390,7 +390,7 @@ typedef float ccMat4[16];
 typedef struct _ccFontShadow
 {
     // true if shadow enabled
-    bool   m_shadowEnabled;
+    BOOL   m_shadowEnabled;
     // shadow x and y offset
     CGSize m_shadowOffset;
     // shadow blurrines
@@ -403,7 +403,7 @@ typedef struct _ccFontShadow
 typedef struct _ccFontStroke
 {
     // true if stroke enabled
-    bool        m_strokeEnabled;
+    BOOL        m_strokeEnabled;
     // stroke color
     ccColor3B   m_strokeColor;
     // stroke size

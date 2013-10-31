@@ -61,12 +61,12 @@
     [super dealloc];
 }
 
--(void) enableShadow:(bool) shadowEnabled
+-(void) enableShadow:(BOOL) shadowEnabled
 {
     _shadow.m_shadowEnabled = shadowEnabled;
 }
 
--(bool) shadowEnabled
+-(BOOL) shadowEnabled
 {
     return  _shadow.m_shadowEnabled;
 }
@@ -91,12 +91,12 @@
     return _shadow.m_shadowBlur;
 }
 
--(void) enableStroke:(bool) strokeEnabled
+-(void) enableStroke:(BOOL) strokeEnabled
 {
     _stroke.m_strokeEnabled = strokeEnabled;
 }
 
--(bool) strokeEnabled
+-(BOOL) strokeEnabled
 {
     return _stroke.m_strokeEnabled;
 }
