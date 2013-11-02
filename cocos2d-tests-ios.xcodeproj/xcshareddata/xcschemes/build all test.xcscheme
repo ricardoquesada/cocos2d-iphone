@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "509807071175041800EA7266"
-               BuildableName = "libbuild all tests.a"
-               BlueprintName = "build all tests"
+               BlueprintIdentifier = "50E1F46D182487C1009C73B0"
+               BuildableName = "build all test"
+               BlueprintName = "build all test"
                ReferencedContainer = "container:cocos2d-tests-ios.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
