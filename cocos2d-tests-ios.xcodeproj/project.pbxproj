@@ -3482,12 +3482,12 @@
 			remoteGlobalIDString = 05CA7AEC10ED674700F12774;
 			remoteInfo = ActionsWithBlocksSample;
 		};
-		A02E260516A4EE00007F064C /* PBXContainerItemProxy */ = {
+		50E1F42D18247E20009C73B0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A02E25F616A4EDFF007F064C /* cocos2d-ios.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 509807081175041800EA7266;
-			remoteInfo = "build all tests";
+			proxyType = 1;
+			remoteGlobalIDString = A04A1FEA13B826B300ABAFB7;
+			remoteInfo = kazmath;
 		};
 		A02E260716A4EE00007F064C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -3679,13 +3679,6 @@
 			remoteInfo = cocos2d;
 		};
 		A02E279416A5E35E007F064C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A02E25F616A4EDFF007F064C /* cocos2d-ios.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5018F24C0DFDEAC400C013A5;
-			remoteInfo = cocos2d;
-		};
-		A02E279616A5E365007F064C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A02E25F616A4EDFF007F064C /* cocos2d-ios.xcodeproj */;
 			proxyType = 1;
@@ -7023,7 +7016,6 @@
 		A02E25F716A4EDFF007F064C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A02E260616A4EE00007F064C /* libbuild all libs.a */,
 				A02E260816A4EE00007F064C /* libbox2d.a */,
 				A02E260A16A4EE00007F064C /* libChipmunk.a */,
 				A02E260C16A4EE00007F064C /* libcocos2d.a */,
@@ -8123,7 +8115,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				A02E279716A5E365007F064C /* PBXTargetDependency */,
+				50E1F42E18247E20009C73B0 /* PBXTargetDependency */,
 			);
 			name = SpriteTest;
 			productName = AtlasSpriteTest;
@@ -9158,13 +9150,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A02E260616A4EE00007F064C /* libbuild all libs.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libbuild all libs.a";
-			remoteRef = A02E260516A4EE00007F064C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		A02E260816A4EE00007F064C /* libbox2d.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -12879,6 +12864,11 @@
 			target = 05CA7AEC10ED674700F12774 /* ActionsWithBlocksSample */;
 			targetProxy = 50C4D3A411777B19000D3C1E /* PBXContainerItemProxy */;
 		};
+		50E1F42E18247E20009C73B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = kazmath;
+			targetProxy = 50E1F42D18247E20009C73B0 /* PBXContainerItemProxy */;
+		};
 		A02E266816A4EE77007F064C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = cocos2d;
@@ -12968,11 +12958,6 @@
 			isa = PBXTargetDependency;
 			name = cocos2d;
 			targetProxy = A02E279416A5E35E007F064C /* PBXContainerItemProxy */;
-		};
-		A02E279716A5E365007F064C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = cocos2d;
-			targetProxy = A02E279616A5E365007F064C /* PBXContainerItemProxy */;
 		};
 		A02E279916A5E36B007F064C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -13625,7 +13610,6 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
-				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
@@ -13648,7 +13632,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
-				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
@@ -13659,7 +13642,6 @@
 					UIKit,
 				);
 				PRODUCT_NAME = RotateWorldTest;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -14288,7 +14270,6 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
-				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = SceneTest;
@@ -14304,11 +14285,9 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
-				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = SceneTest;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
