@@ -4873,9 +4873,22 @@
 					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				HEADER_SEARCH_PATHS = (
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				"HEADER_SEARCH_PATHS[arch=arm64]" = (
 					"$(inherited)",
-					external/JavaScript/SpiderMonkey/iOS/include,
+					external/JavaScript/SpiderMonkey/iOS/include64,
+				);
+				"HEADER_SEARCH_PATHS[arch=armv7]" = (
+					"$(inherited)",
+					external/JavaScript/SpiderMonkey/iOS/include32,
+				);
+				"HEADER_SEARCH_PATHS[arch=armv7s]" = (
+					"$(inherited)",
+					external/JavaScript/SpiderMonkey/iOS/include32,
+				);
+				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					external/JavaScript/SpiderMonkey/iOS/include32,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4897,9 +4910,22 @@
 					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				HEADER_SEARCH_PATHS = (
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				"HEADER_SEARCH_PATHS[arch=arm64]" = (
 					"$(inherited)",
-					external/JavaScript/SpiderMonkey/iOS/include,
+					external/JavaScript/SpiderMonkey/iOS/include64,
+				);
+				"HEADER_SEARCH_PATHS[arch=armv7]" = (
+					"$(inherited)",
+					external/JavaScript/SpiderMonkey/iOS/include32,
+				);
+				"HEADER_SEARCH_PATHS[arch=armv7s]" = (
+					"$(inherited)",
+					external/JavaScript/SpiderMonkey/iOS/include32,
+				);
+				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					external/JavaScript/SpiderMonkey/iOS/include32,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5169,6 +5195,7 @@
 				50E1F3D918246FEC009C73B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A02900EA15B5FA9E00D64F82 /* Build configuration list for PBXNativeTarget "CocosBuilderReader" */ = {
 			isa = XCConfigurationList;

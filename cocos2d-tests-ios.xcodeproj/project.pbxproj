@@ -14799,9 +14799,22 @@
 				);
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				HEADER_SEARCH_PATHS = (
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				"HEADER_SEARCH_PATHS[arch=arm64]" = (
 					"$(inherited)",
-					external/JavaScript/SpiderMonkey/iOS/include,
+					external/JavaScript/SpiderMonkey/iOS/include64,
+				);
+				"HEADER_SEARCH_PATHS[arch=armv7]" = (
+					"$(inherited)",
+					external/JavaScript/SpiderMonkey/iOS/include32,
+				);
+				"HEADER_SEARCH_PATHS[arch=armv7s]" = (
+					"$(inherited)",
+					external/JavaScript/SpiderMonkey/iOS/include32,
+				);
+				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					external/JavaScript/SpiderMonkey/iOS/include32,
 				);
 				INFOPLIST_FILE = "tests/cocos2d-js-tests/games/MoonWarriors/Platform/iOS/Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -14824,9 +14837,22 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				HEADER_SEARCH_PATHS = (
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				"HEADER_SEARCH_PATHS[arch=arm64]" = (
 					"$(inherited)",
-					external/JavaScript/SpiderMonkey/iOS/include,
+					external/JavaScript/SpiderMonkey/iOS/include64,
+				);
+				"HEADER_SEARCH_PATHS[arch=armv7]" = (
+					"$(inherited)",
+					external/JavaScript/SpiderMonkey/iOS/include32,
+				);
+				"HEADER_SEARCH_PATHS[arch=armv7s]" = (
+					"$(inherited)",
+					external/JavaScript/SpiderMonkey/iOS/include32,
+				);
+				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					external/JavaScript/SpiderMonkey/iOS/include32,
 				);
 				INFOPLIST_FILE = "tests/cocos2d-js-tests/games/MoonWarriors/Platform/iOS/Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
