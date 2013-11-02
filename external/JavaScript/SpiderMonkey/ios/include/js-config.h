@@ -36,7 +36,7 @@
 
 /* The configure script defines these if it doesn't #define
    JS_HAVE_STDINT_H.  */
-#define JS_BYTES_PER_WORD 8
+#define JS_BYTES_PER_WORD 4
 
 /* MOZILLA JSAPI version number components */
 #define MOZJS_MAJOR_VERSION 25
